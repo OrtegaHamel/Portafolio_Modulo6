@@ -4,30 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mi Proyecto{% endblock %}</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'lista_productos' %}">Mi Proyecto</a>
+            <a class="navbar-brand" href="{% url 'inicio' %}">Mi Proyecto</a>
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none;">Cerrar Sesión</button>
+                    </form>
                 {% else %}
                     <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+                    <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
                 {% endif %}
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container flex-grow-1 mt-4">
         {% block content %}{% endblock %}
     </div>
 
-    <!-- Bootstrap 5 JS -->
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0">Desarrollado por Álvaro Ortega Hamel para el Bootcamp Python Django de Talento Digital</p>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
+
+

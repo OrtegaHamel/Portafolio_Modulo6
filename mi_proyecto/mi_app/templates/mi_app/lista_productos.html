@@ -1,14 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Productos</title>
-</head>
-<body>
-    <h1>Lista de Productos</h1>
-    <ul>
-        {% for producto in productos %}
-            <li>{{ producto.nombre }} - ${{ producto.precio }} (Stock: {{ producto.stock }})</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'mi_app/base.html' %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Lista de Productos</h1>
+    <!-- Botón para agregar producto -->
+    {% if perms.mi_app.add_producto %}
+        <a href="{% url 'agregar_producto' %}" class="btn btn-success mb-3">Agregar Producto</a>
+    {% endif %}
+
+    <!-- Botón para el panel de administración -->
+    {% if es_administrador %}
+        <a href="{% url 'gestionar_usuarios' %}" class="btn btn-primary mb-3">Gestionar Usuarios</a>
+    {% endif %}
+
+    <!-- Tabla de productos -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.stock }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

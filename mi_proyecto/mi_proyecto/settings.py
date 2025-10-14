@@ -99,6 +99,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = 'lista_productos'  # Redirige a la lista de productos después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'inicio'  # Redirige a la página de inicio después de cerrar sesión
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

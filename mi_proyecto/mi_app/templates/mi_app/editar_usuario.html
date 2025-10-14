@@ -1,0 +1,55 @@
+{% extends 'mi_app/base.html' %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Editar Usuario: {{ usuario.username }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Campo: Nombre de usuario (no editable) -->
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Nombre de Usuario</label>
+            <input type="text" class="form-control" id="id_username" value="{{ usuario.username }}" disabled>
+        </div>
+
+        <!-- Campo: Nombre -->
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="id_first_name" name="first_name" value="{{ usuario.first_name }}" required>
+        </div>
+
+        <!-- Campo: Apellido -->
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="id_last_name" name="last_name" value="{{ usuario.last_name }}" required>
+        </div>
+
+        <!-- Campo: Email -->
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="id_email" name="email" value="{{ usuario.email }}" required>
+        </div>
+
+        <!-- Campo: Grupos -->
+        <div class="mb-3">
+            <label for="id_groups" class="form-label">Grupos</label>
+            <select class="form-select" id="id_groups" name="groups" multiple>
+                {% for grupo in grupos %}
+                    <option value="{{ grupo.id }}" {% if grupo in usuario.groups.all %}selected{% endif %}>{{ grupo.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Campo: ¿Es administrador? -->
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="id_is_staff" name="is_staff" {% if usuario.is_staff %}checked{% endif %}>
+            <label class="form-check-label" for="id_is_staff">¿Es administrador?</label>
+        </div>
+
+        <!-- Botones -->
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a href="{% url 'gestionar_usuarios' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

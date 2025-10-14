@@ -1,0 +1,38 @@
+{% extends 'mi_app/base.html' %}
+
+{% block title %}Gestionar Usuarios{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Gestionar Usuarios</h1>
+
+    <a href="{% url 'lista_productos' %}" class="btn btn-secondary mb-3">Volver</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Nombre</th>
+                <th>Grupos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.get_full_name }}</td>
+                    <td>
+                        {% for grupo in usuario.groups.all %}
+                            {{ grupo.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'editar_usuario' usuario.id %}" class="btn btn-primary">Editar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
