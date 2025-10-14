@@ -18,6 +18,7 @@ Este proyecto es una aplicación web desarrollada con **Django**, diseñada para
 ---
 ## **Estructura del Proyecto**
 
+```
 mi_proyecto/
 │
 ├── mi_app/
@@ -33,7 +34,7 @@ mi_proyecto/
 │   │       ├── agregar_producto.html
 │   │       ├── gestionar_usuarios.html
 │   │       └── editar_usuario.html
-│   ├── init.py
+│   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
 │   ├── forms.py
@@ -42,7 +43,7 @@ mi_proyecto/
 │   └── views.py
 │
 ├── mi_proyecto/
-│   ├── init.py
+│   ├── __init__.py
 │   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
@@ -51,6 +52,8 @@ mi_proyecto/
 ├── manage.py
 ├── caracteristicas.md
 └── README.md
+```
+
 
 
 ---
