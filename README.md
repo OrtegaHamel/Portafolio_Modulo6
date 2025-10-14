@@ -126,10 +126,6 @@ source env/bin/activate  # Linux/Mac
 env\Scripts\activate     # Windows
 ```
 
-### **Instalar Dependencias**
-```bash
-pip install -r requirements.txt
-```
 
 ### **Configurar la Base de Datos**
 ```bash
