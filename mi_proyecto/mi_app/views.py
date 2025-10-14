@@ -52,10 +52,6 @@ def es_administrador(user):
     return user.groups.filter(name='Administradores').exists()
 
 @user_passes_test(es_administrador)
-def admin_view(request):
-    return render(request, 'mi_app/admin_view.html')
-
-@user_passes_test(es_administrador)
 def gestionar_usuarios(request):
     usuarios = User.objects.all().prefetch_related('groups')
     return render(request, 'mi_app/gestionar_usuarios.html', {'usuarios': usuarios})
